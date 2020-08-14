@@ -1,0 +1,40 @@
+.review-wrapper{
+    width:80%;
+    margin:auto;
+    display:grid;
+    grid-template-columns: 1fr;
+    font-size:4rem;
+    text-align:center;
+
+    .review{
+        height:25rem;
+        display:grid;
+        margin:2rem auto;
+        grid-template-columns: repeat(2,1fr);
+        width:70%;
+        border-bottom:0.5rem solid black;
+        .user{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            
+            p{
+                font-size:1.6rem;
+            }
+            img{
+                margin:auto;
+            }
+            
+            }
+        .testi{
+            display:flex;
+            justify-content: center;
+        p{
+            padding:1rem;
+            font-size:3rem;
+        }
+        }
+    }
+
+}

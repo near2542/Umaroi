@@ -1,0 +1,322 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+@import '_menu.scss';
+@import '_order.scss';
+@import '_order-check.scss';
+@import '_review.scss';
+@import '_admin.scss';
+$nav : 10vh;
+$section : 85vh;
+$footer :5vh;
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Montserrat' , sans-serif;
+    font-size:62.5%;
+    
+}
+
+body{
+    margin:auto;
+    width:100vw;
+    height:100vh;
+    
+}
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+/* ----------------------------------------------------------------navbar---------------------------------------------------------------- */
+.hamburger{
+    display:none;
+}
+
+#sidebar{
+    height:100%;
+    width:50vw;
+    position: fixed;
+    left:-50vw;
+    transition:all 0.5s ease-out;
+    background-color: rgba(150,150,0,.7);
+    a{
+        text-decoration: none;
+        
+    }
+    ul{
+        padding-top:1rem;
+        height: 50%;
+        margin:auto;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size:4rem;
+        align-items: center;
+        text-align: center;
+        transition:0.3s ease-in-out;
+        overflow:hidden;
+        li{
+            border-bottom: 0.3rem solid black;
+            width:100%;
+            height:5rem;
+           
+        
+            &>a{
+                color:white;
+                transition: 0.3s ease-in-out;
+            }
+            &:hover>a{
+                color:black;
+               
+            }
+        &:hover{       
+            transform:scale(1.5);
+            transition:0.4s ease-in;
+        }
+    
+            }
+            
+            
+        }
+    }
+
+
+/*----------------------------------------------------------NAV section--------------------------------------*/
+nav{
+    display:flex;
+    flex-direction:row;
+    height:$nav;
+    background: rgba(176, 161, 32,0.8);
+    
+    z-index: 1;
+    & a{
+        transition: 0.3s ease-in-out;
+        color:white;
+       }
+        & a:hover{
+            color:black;
+           
+        }
+            .brand{
+                    flex:1;
+                    display:flex;
+                    flex-direction: row;
+                    align-items: center;
+                    
+                    .img-cont{
+                        padding-left:2rem;
+                        padding-right:0.5rem;
+                        width:9vh;
+
+                        display:flex;
+                        flex-direction: row;
+                        justify-content: center;
+                       align-items: center;
+                    img{
+                            width:100%;
+                            
+                        }
+                    }
+                    & h1{
+                            font-size:6rem;
+                            color:white;
+                    }
+                }
+    
+                    .menu{
+                        flex:0.8;
+                        display:flex;
+                        flex-direction:row;
+                        list-style:none; 
+                        justify-content: space-evenly;
+                        align-items: center;
+                        font-size: 6rem;
+                
+                        a{
+                            color:white;
+                            &:hover{
+                                color:black;
+                            }
+                        }
+
+                     }
+            }
+/* ----------------------------------------------------------------End navbar---------------------------------------------------------------- */
+
+/*----------------------------------------------------------SHOWCASE section--------------------------------------*/
+.showcase{
+    height:$section;
+    display:grid;
+    grid-template  :"left right";
+    grid-gap: 0.5rem;
+    
+    
+        button{
+            font-size: 4rem;
+            padding:2rem;
+            border-radius: 1rem;
+            background-color: #35a6fc;
+            color:white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            &:hover{
+                color:black;
+            }
+        }
+        .container{
+            width:100%;
+            height: 100%;
+            background-image: url(img/left.jpg);
+            opacity: 0.6;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow:hidden;
+            transform: translateZ(0);
+            transition: 0.3s all ease-in-out;
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s ease-in-out;
+
+            &:hover{
+                opacity:1;
+                transform: scale(1.05);
+                overflow:hidden;
+                &>button{
+                    background-color: #058af0;
+                }
+                
+            }
+            }
+            
+            
+        .left{
+            grid-area:left;
+            order:0;
+            overflow:hidden;
+        }
+    
+        .right{
+            grid-area:right;
+            order:1;
+            overflow:hidden;         
+        }
+    }      
+    /*-----------------------------------END SECTION----------------------------------------*/
+
+footer{
+    height:5vh;
+    background-color: black;
+
+        ul{
+            color:white;
+            font-size:3rem;
+            padding:0 2rem;
+            text-decoration: none;
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            li {
+                
+                &>a{
+                    font-size:2rem;
+                    color:white;
+
+                }
+            }
+        }
+        
+}
+
+#sidebar{
+    display:none;
+}
+
+   /*----------------------------------- end of footer ----------------------------------------------- */
+
+
+
+@media screen and (max-width:1150px)
+{
+    #sidebar{
+        display:block;
+        
+    }
+    .menu{
+        display:none !important;
+    }
+    .ham-wrap{
+        display:inline;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        padding-right:2rem;
+        margin:auto;
+       
+
+    .hamburger{
+        display:flex;
+        flex-direction: column;
+        width:100%; 
+        transition: 0.3s ease-in-out;
+        background-color: grey;
+        border:0.2rem white solid;
+        justify-content: center;
+        align-items: center;
+        &:hover{
+            background-color:black;
+            div{
+                background-color: white;
+            }
+            }
+        div{
+            transition: 0.3s ease-in-out;
+            height:0.5rem;
+            width:4rem;
+            background-color: black;
+            margin:0.5rem;
+            
+        }
+        
+    }
+    
+    }
+
+    
+
+footer{
+    height: auto;
+    ul{
+       
+        flex-direction: column;
+    }
+}
+#sidebar.show{
+    left:0vw;
+    transition:all 1s ease-in;
+    
+    z-index:1;
+    
+
+}
+
+}
+
+
+@media screen and (max-width:800px)
+{
+    .showcase{
+        grid-template:"left"
+        "right";
+    }
+    h1{
+        display:none;
+    }
+}

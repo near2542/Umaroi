@@ -1,0 +1,110 @@
+.order-wrapper{
+    background:linear-gradient(180deg, #3414F4 0%, rgba(255, 255, 255, 0) 100%), #6178F4;
+            div{
+                margin:auto;
+                padding-top:4rem;
+                text-align: center;
+
+                h1{
+                    font-size:5rem;
+                  }
+            }
+            
+            .order-menu
+            {
+                margin:auto;
+                width:70%;
+                display:grid;
+                grid-template-columns: 1fr;
+                padding-bottom:1rem;
+                .order{
+                    display:grid;
+                    grid-template-columns: repeat(2,1fr);
+                    border-bottom: 2px solid black;
+                    padding-bottom:2rem;
+                    .img{
+                        img{
+                            width:98%;
+                        }
+                    }
+                    .message{
+                        padding-left:2rem;
+                        text-align:left;
+                        line-height: 1.6;
+                        font-size:4rem;
+
+                        input{
+                            font-size:2rem;
+                            width:4rem;
+                        }
+                    }
+                }
+            }
+
+}
+
+    form{
+        font-size:2rem;
+        background-color:#C4C4C4;;
+        height:100%;
+        padding:2rem 2rem;
+    
+            h1{
+                text-align:center;
+                font-size:2em;
+                padding-bottom:2rem;
+              }  
+        }
+    
+
+    table{
+        width:80%;
+        margin:auto;
+        border-collapse:collapse;
+        th{
+            font-size:4rem;
+            padding:1rem;
+        }
+        td{
+            font-size:2rem;
+            text-align:left;
+            padding:0.5rem;
+        }
+        th,tr,td{
+            border:1px solid #ddd;
+        }
+        .name{
+            width:50%;
+        }
+        .qty{
+            width:10%;
+        }
+        .price{
+            width:10%;
+        }
+        .total{
+            width:30%;
+        }
+    }
+
+    .cart{
+        font-size:4rem;
+        padding:1rem;
+        position:fixed;
+        background-color: red;
+        border-radius: 2rem;
+        top:88vh;
+        right:1vw;
+    }
+
+
+.button{
+    margin:auto;
+    button{
+        border: 0.1rem solid black;
+        border-radius: 1rem;;
+        padding:1rem;
+        font-size:2rem;
+        cursor:pointer;
+    }
+}

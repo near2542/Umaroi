@@ -1,0 +1,63 @@
+<%- include ('partials/header')%>
+
+
+<div class="order-wrapper">
+    <div><h1>สั่งอาหาร</h1></div>
+
+
+    
+    <div class="order-menu">
+        <!--start if-->
+        <% if (foods.length > 0){%>
+            <!--start looping-->
+            <% foods.forEach((food)=> { %>
+                <div class="order">
+                    <div class="img">
+                        <% if (!food.img)  food.img = 'imgs/anonymous.jpg' %>
+                        <img src="<%=food.img%>" alt="">
+                    </div>
+                    <div class="message">
+                      <p><%=food.name%></p>
+                      <p>ราคา <%=food.price%> บาท</p>
+                      <p>จำนวน <input type="number" /> ชิ้น</p>
+                    </div>
+                </div>
+                <%}) %> 
+         <!--end foreach-->
+                <% } else {%> <!--else-->
+
+                    <h1>ORDER PAGE NOT FOUND , Please contact admin</h1>
+                
+                <% } %> <!-- end if / else-->
+
+   <!--END order-->     
+    
+</div>
+
+<!--END order-menu-->
+<a class="cart" href="#cart">ไปที่ตะกร้า</a>
+
+        <form action="#" id="cart">
+           <h1>สรุปรายการ</h1>
+               <table>
+                   <tr>
+                       <th class="name">ชื่อเมนู</th>
+                       <th class="price">ราคา</th>
+                       <th class="qty">ชิ้น</th>
+                       <th class="total">รวมราคา(บาท)</th>
+                   </tr>
+                   <!-------------------End table head------------------>
+                   
+
+               </table>
+               <div class="button">
+                <button onclick="">ยืนยัน</button>
+                </div>
+        </form>
+   
+
+</div>
+
+
+
+<%- include ('partials/footer')%>

@@ -1,0 +1,24 @@
+<%- include ('partials/header') %>
+
+<div class="check-wrapper">
+        
+    <div class="search">
+       <span>ระบุเลขออเดอร์</span> <input type="text" placeholder="ระบุเลขออเดอร์"/> <button>ค้นหา</button>
+    </div>
+    
+    <div class="check-result">
+        <table id="order-check">
+            <tr>
+                <th class="orderID">เลขออเดอร์</th>
+                <th class="payStatus">สถานะจ่ายเงิน</th>
+                <th class="deliverStatus">สถานะการส่ง</th>
+            </tr>
+            <tr id="#result">
+                <td class="orderID">04082001</td>
+                <td class="payStatus">eq</td>
+                <td class="deliverStatus">eq</td>
+            </tr>
+        </table>
+    </div>
+
+</div>

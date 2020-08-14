@@ -1,0 +1,87 @@
+#admin-dashboard{
+    display:grid;
+    grid-template-areas: "aside dashboard";
+    grid-template-columns: 20% 1fr;
+}
+
+aside{
+    grid-area:aside;
+    font-size:4rem;
+    position:fixed;
+    height:100%;
+    width:20%;
+    background-color:rgba(0,20,20,0.5);
+    .admin-name{
+        height:20rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin:4rem 4rem;
+        
+        img{
+            width:10rem;
+            height:10rem;
+            clip-path: ellipse();
+            margin-bottom:2rem;
+        }
+    }
+
+    .admin-menu{
+        
+        margin-top:4rem;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+
+
+        li{
+            padding-bottom:2rem;
+            
+            &>a{
+                font-size:3rem;
+                color:black;
+                transition: 0.5s ease-in-out;
+            }
+            &:hover>a{
+                color:white;
+                
+            }
+        }
+        
+    }
+}
+
+
+.dashboard{
+    grid-area:dashboard;
+   
+    font-size:4rem;
+
+    .stat{
+        position:relative;
+        display:grid;
+        grid-template-columns: repeat(auto-fit,minmax(20rem,1fr));
+        grid-column-gap:2rem;
+        grid-row-gap:1rem;
+        margin:2rem 2rem;
+        height:20rem;
+        
+        &>div{
+            padding:1rem 0 0 1rem;
+            font-size:2rem;
+            height:10rem;
+            background-color:grey;
+            border-bottom: 0.2rem solid black;
+            box-shadow: black 0.3rem 0.2rem;
+        }
+    }
+}
+
+.stat-wrap
+        {
+            padding-top:1rem;
+            text-align: center;
+            font-size:2rem;
+            font-weight:bold;
+}
+

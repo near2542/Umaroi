@@ -1,0 +1,41 @@
+<%- include ('../partials/adminNav') %>
+<section class="dashboard">
+<div class="menu-wrapper">
+    <div><h1>MENU</h1></div>
+    <a href="/admin/food/newfood">add new food</a>
+    <div class="menu-show">
+ 
+
+<% if (foods.length > 0){%>
+    <% foods.forEach((food)=> { %>
+
+            <div class="menu-list">
+                <% if (!food.img)  food.img = 'imgs/anonymous.jpg' %>
+                <img src="<%= food.img %>" alt="<%=food.name%>"
+                <p> <%= food.name %> 
+                    <%= food.price %> บาท</p>
+                <p class="description"><%= food.description %> </p>
+                <p><a href="/admin/food/edit/<%= food._id %>">edit</a> <a class="del" href="/admin/food/delete/<%= food._id %>">delete</a></p>
+
+            </div>
+    
+
+    <%}) %>  <!--end foreach-->
+
+<% } else {%> <!--else-->
+
+    <h1>MENU NOT FOUND</h1>
+
+<% } %> <!-- end if / else-->
+</div>
+</div>
+</section>
+
+<script>
+    let del = document.querySelectorAll("a.del");
+    del.addEventListener('click',(e)=>
+    {
+        e.preventDefault();
+    })
+</script>
+<%- include ('../partials/adminFooter') %>

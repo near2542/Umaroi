@@ -3,12 +3,22 @@ const router = express.Router();
 const Food = require("../Food/FoodModel");
 const Order = require("../Order/OrderModel");
 const admin = require('./AdminModel')
-const bodyParser = require('body-parser');
-const adminDB = require('./AdminModel');
 const cookieParser = require("cookie-parser");
-const { equal } = require('assert');
-const { render } = require('ejs');
+const path = require('path')
+const multer = require('multer')
 
+
+const Imgpath = path.resolve('public/imgs')
+const storage = multer.diskStorage({
+  destination:function(req,file,callback){
+    callback(null,Imgpath)
+  },
+  filename:function(req,file,callback){
+    callback(null,file.originalname)
+  }
+})
+
+const upload = multer({storage:storage})  ///////////////////////////create multer 
 
 router.post("/register",async (req,res)=>{
   const newAdmin = new admin(req.body)
@@ -26,6 +36,7 @@ router.post("/register",async (req,res)=>{
 
 router.get("/login",async (req,res)=>
 {
+  console.log(Imgpath);
    res.render('admin/login');
 });
 
@@ -35,14 +46,14 @@ router.post("/login",async(req,res)=>
      {
       if(data) 
       {
-          if(data.password === req.body.password) res.redirect(`admin/dashboard/`+req.body.id)
+          if(data.password === req.body.password) res.redirect('/admin/dashboard/')
           else res.redirect('/admin/login')
       }
-  else 
+    else 
      {
-      console.log('this one didnt find data')
-       res.redirect('/admin/login')
-     }})
+      res.redirect('/admin/login');
+     }
+    })
 })
 
 // ------------------------------------------end Login------------------------------------------ //
@@ -50,19 +61,46 @@ router.post("/login",async(req,res)=>
 
 
 //----------------------------------------ADMIN control panel----------------------------------------//
-router.get("/dashboard/:id",async(req,res)=>
+router.get("/dashboard",async(req,res)=>
 {
-  res.render("admin/dashboard",{id:req.params.id})
+  res.render("admin/dashboard")
 })
 
 router.get("/food",async(req,res)=>
 {
   Food.find({}).exec((err, data) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json(data);
+    res.status(200).render('admin/menu',{foods:data})
   });
 })
 
+router.get("/food/newfood",async(req,res)=>
+{
+  res.render('admin/foodForm');
+})
+
+router.post("/food/newfood", upload.single('img'),async (req,res)=>
+{
+  try{
+    console.log(req.file)
+    console.log(req.body)
+    const newFood = new Food(
+      {name : req.body.name,
+      price : req.body.price,
+      img : `\\imgs\\${req.file.originalname}`,
+      description : req.body.description}
+    )
+    await newFood.save((err, data) => {
+    console.log('save')
+  });
+  res.redirect(200,'/admin/dashboard');
+}
+catch(err)
+{
+  console.log(err)
+  res.redirect('/admin/food');
+}
+})
 
 router.get("/food/:id",async (req,res)=>
 {
@@ -73,51 +111,60 @@ router.get("/food/:id",async (req,res)=>
   });
 })
 
-router.get("/food/newfood",async(req,res)=>
-{
-  res.render('admin/foodForm');
-})
-router.post("/food/newfood",(req,res)=>
-{
-  const newFood = new Food(req.body)
-  newFood.save((err, data) => {
-    if (err) return res.status(400).send(err);
-    res.redirect(200,'/admin/food')
-  });
-})
 
-router.get("/food/edit/:id",(req,res)=>
+
+router.get("/food/edit/:_id",(req,res)=>
 {
   Food.findById(req.params).exec((err,data)=>
   {
-    if(data) res.status(200).render('admin/foodForm',{food:data})
+    if(err) res.status(400).send(err)
+    res.status(200).render('admin/editfoodForm',{food:data});
+
   })
 })
-router.put("/food/edit/:_id",(req,res)=>
+router.post("/food/edit/:_id",upload.single('img'),(req,res)=>
 {
-    Food.findByIdAndUpdate(req.params._id, req.body, (err, data) => {
+    Food.findByIdAndUpdate(req.params._id, 
+      {name : req.body.name,
+      price : req.body.price,
+      img : `\\imgs\\${req.file.originalname}`,
+      description : req.body.description}, 
+      (err, data) => {
         if (err) return res.status(400).send(err);
-        res.status(200).send("อัพเดทข้อมูลเรียบร้อย");
+        res.status(200).redirect('/admin/food')
       });
 })
 
 
-router.delete("/:_id",(req,res)=>
+router.post("/food/delete/:_id",(req,res)=>
 {
     Food.findByIdAndDelete(req.params._id, (err, data) => {
         if (err) return res.status(400).send(err);
-        res.status(200).send("ลบข้อมูลเรียบร้อย");
+        console.log('done');
+        res.status(200).redirect('/admin/food')
       });
 })
 
-router.get("/menu/:_id",(req,res)=>
+router.get("/order",(req,res)=>
 {
-    Food.findById(params._id).exec((err,data) =>
-    {
-        if(err) return res.status(400).send(err)
-        res.status(200).send(data);
-    })
+  Order.find({}).exec((err,data)=>
+  {
+    if (err) {console.log('data not found') 
+    res.redirect(400,'/admin/dashboard')}
+
+    res.render('admin/OrderHistory',{orders:data})
+  })
 })
+
+router.get("/logout",(req,res)=>
+{
+  res.status(200).send('logout is done!')
+})
+
+
+
+
+
 
 //---------------------------------------- end ADMIN control panel----------------------------------------//
 

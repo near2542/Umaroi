@@ -1,42 +1,40 @@
-<%- include ('partials/header')%>
-
+<%- include ('partials/header') %>
 
 <div class="order-wrapper">
     <div><h1>สั่งอาหาร</h1></div>
 
-
-    
     <div class="order-menu">
-        <!--start if-->
-        <% if (foods.length > 0){%>
-            <!--start looping-->
-            <% foods.forEach((food)=> { %>
-                <div class="order">
+<% if (foods.length > 0){%>
+    <% foods.forEach((food)=> { %>
+        
+        <div class="order-menu">
+            <div class="order">
                     <div class="img">
-                        <% if (!food.img)  food.img = 'imgs/anonymous.jpg' %>
                         <img src="<%=food.img%>" alt="">
                     </div>
                     <div class="message">
                       <p><%=food.name%></p>
                       <p>ราคา <%=food.price%> บาท</p>
-                      <p>จำนวน <input type="number" /> ชิ้น</p>
+                      <p>จำนวน <input type="number" /> บาท</p>
                     </div>
-                </div>
-                <%}) %> 
-         <!--end foreach-->
-                <% } else {%> <!--else-->
+            </div>
+        </div>
 
-                    <h1>ORDER PAGE NOT FOUND , Please contact admin</h1>
-                
-                <% } %> <!-- end if / else-->
+    <%}) %>  <!--end foreach-->
 
-   <!--END order-->     
-    
+<% } else {%> <!--else-->
+
+    <h1>MENU NOT FOUND</h1>
+
+<% } %> <!-- end if / else-->
+</div>
 </div>
 
-<!--END order-menu-->
 <a class="cart" href="#cart">ไปที่ตะกร้า</a>
 
+
+
+  
         <form action="#" id="cart">
            <h1>สรุปรายการ</h1>
                <table>
@@ -47,17 +45,32 @@
                        <th class="total">รวมราคา(บาท)</th>
                    </tr>
                    <!-------------------End table head------------------>
-                   
+                   <tr id="list">
+                        <td class="name">mock up</td>
+             </div>
+                  
+        
+        
+        <td class="price">ราคา</td>
+                        <td class="qty">ชิ้น</td>
+                        <td class="total">รวมราคา(บาท)</td>
+                    </tr>
+                    <tr id="list">
+                        <td class="name">mock up</td>
+                        <td class="price">ราคา</td>
+                        <td class="qty">ชิ้น</td>
+                        <td class="total">รวมราคา(บาท)</td>
+                    </tr>
+                    <tr id="list">
+                        <td class="name">mock up</td>
+                        <td class="price">ราคา</td>
+                        <td class="qty">ชิ้น</td>
+                        <td class="total">รวมราคา(บาท)</td>
+                    </tr>
 
                </table>
                <div class="button">
                 <button onclick="">ยืนยัน</button>
-                </div>
-        </form>
-   
-
 </div>
-
-
-
-<%- include ('partials/footer')%>
+</form>  
+<%- include ('partials/footer') %>

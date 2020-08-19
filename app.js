@@ -11,9 +11,8 @@ const session = require('express-session');
 async function connect()
 {   
     try{
-      console.log('conencting')
-        await db.connect(url,{useNewUrlParser: true,useUnifiedTopology: true});
-        console.log('connection success');
+      
+      await db.connect(url,{useNewUrlParser: true,useUnifiedTopology: true});
     }
     catch(err){
         console.log(err);
@@ -38,7 +37,7 @@ app.use("/food", Food);
 const Order = require("./api/Order/OrderRouter");
 app.use("/order",Order);
 
-const Admin = require("./api/admin/AdminRouter");
+const Admin = require("./api/admin/AdminRouter");     
 app.use("/admin",Admin)
 
 app.get('/',async(req, res)=> {

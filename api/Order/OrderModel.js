@@ -5,7 +5,8 @@ const OrderSchema = {
     MenuList : [{
         MenuName : {type:String,required:true},
         Price  : {type:Number,required:true},
-        qty : {type:Number,required:true}
+        qty : {type:Number,required:true},
+        total : {type:Number,default:0}
     }],
     Total :{type:Number,required:true,default:0},
     Confirmed : {type:Boolean,default:false},

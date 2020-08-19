@@ -1,0 +1,39 @@
+<%- include ('../partials/adminNav')%>
+
+<section class="dashboard"> 
+<div class="menu-wrapper">
+    <div><h1>Order</h1></div>
+    <div class="menu-show">
+
+
+<% if (orders.length > 0){%>
+    <% orders.forEach((order)=> { %>
+        
+            <div class="menu-list">
+                <p><%= order.cus_name%></p> 
+                
+                <% order.MenuList.forEach((list)=>
+                {%>
+                   <p><%=list.MenuName%> <%=list.Price%> <%=list.qty%> <%=list.total%></p> 
+               <% })%>
+
+               
+                <p><%= order.cus_name%></p> 
+                <p><%= order.Total%></p> 
+                <p><%= order.Confirmed%></p> 
+                <p><%= order.Location%></p> 
+                
+    
+
+    <%}) %>  <!--end foreach-->
+
+<% } else {%> <!--else-->
+
+    <h1>MENU NOT FOUND</h1>
+
+<% } %> <!-- end if / else-->
+</div>
+</div>
+</section>
+
+<%- include ('../partials/adminFooter')%>

@@ -14,21 +14,6 @@ router.get("/",async (req,res)=>
 })
 })
 
-router.get("/all",async (req,res)=>
-{
-    
-})
-// For using on admin page only
-router.get("/:_id",async (req,res)=>
-{
-    Food.findById(params._id).exec((err,data) =>
-    {
-        if(err) return res.status(400).send(err)
-        res.status(200).send(data);
-    })
-})
-
-
 router.post("/:_id",async (req,res)=>
 {
   const newFood = new Food(req.body)

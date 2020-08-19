@@ -44,7 +44,7 @@
 
 .menu-wrapper .menu-show .menu-list img {
   width: 70%;
-  height: 70%;
+  height: 30rem;
   margin: 1rem auto;
   padding-bottom: 2rem;
   border-bottom: 0.4rem solid blanchedalmond;
@@ -133,8 +133,13 @@
   padding-bottom: 2rem;
 }
 
+.order-wrapper .order-menu .order .img {
+  width: 100%;
+}
+
 .order-wrapper .order-menu .order .img img {
-  width: 98%;
+  width: 40rem;
+  height: 30rem;
 }
 
 .order-wrapper .order-menu .order .message {
@@ -345,7 +350,7 @@ aside {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: aside;
-  font-size: 4rem;
+  font-size: 3.6rem;
   position: fixed;
   height: 100%;
   width: 20%;
@@ -394,7 +399,7 @@ aside .admin-menu li {
 }
 
 aside .admin-menu li > a {
-  font-size: 3rem;
+  font-size: 2.6rem;
   color: black;
   -webkit-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;

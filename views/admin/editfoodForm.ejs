@@ -1,0 +1,18 @@
+<html>
+<body>
+
+        <form action="/admin/food/edit/<%=food._id%>" method="POST"  enctype="multipart/form-data">
+        <%-console.log(food) %>
+            <label>Food Name</label><input type="text" placeholder="Food Name" id="name" name="name" value="<%=food.name%>"/>
+            <label>Price</label><input type="text" placeholder="Price" id="price" name="price" value="<%=food.price%>"/>
+            <label>Img <img style="width:300px" src="<%=food.img%>"></label><input type="file" placeholder="foodName" id="img" name="img" value="<%=food.img%>"/>
+            <label>description</label>
+            <textarea placeholder="description" id="description" name="description" value="<%=food.description%>"></textarea>
+            <a href="/admin/dashboard" class="btn btn-back">GO back</a>
+        
+            <input type="submit"/>
+        </form>
+
+        
+</body>
+</html>

@@ -13,13 +13,17 @@ async function connect()
     try{
       
       await db.connect(url,{useNewUrlParser: true,useUnifiedTopology: true});
+      console.log('connect success')  
+      
     }
     catch(err){
         console.log(err);
     }
 }
 
+
 connect();
+
 app.set('views',)
 app.set('view engine', 'ejs');
 

@@ -10,7 +10,6 @@ router.get("/",async (req,res)=>
 {
     if(err) console.log('sad')
     else res.render('order.ejs',{foods:data})
- 
 })
 })
 

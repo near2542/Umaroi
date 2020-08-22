@@ -8,16 +8,16 @@
     <% foods.forEach((food)=> { %>
         
         <div class="order-menu">
-            <div class="order">
-                    <div class="img">
-                        <img src="<%=food.img%>" alt="">
-                    </div>
-                    <div class="message">
-                      <p><%=food.name%></p>
-                      <p>ราคา <%=food.price%> บาท</p>
-                      <p>จำนวน <input type="number" /> บาท</p>
-                    </div>
-            </div>
+                        <div class="order">
+                                <div class="img">
+                                    <img src="<%=food.img%>" alt="">
+                                </div>
+                                <div class="message">
+                                  <p> <span id="name"><%=food.name%></span></p>
+                                  <p>ราคา <span id="price"><%=food.price%></span> บาท</p>
+                                  <p>จำนวน <input type="number"/> บาท</p>
+                                </div>
+                        </div>
         </div>
 
     <%}) %>  <!--end foreach-->
@@ -35,7 +35,7 @@
 
 
   
-        <form action="#" id="cart">
+        <form action="#" id="cart" method="POST">
            <h1>สรุปรายการ</h1>
                <table>
                    <tr>
@@ -45,32 +45,85 @@
                        <th class="total">รวมราคา(บาท)</th>
                    </tr>
                    <!-------------------End table head------------------>
-                   <tr id="list">
-                        <td class="name">mock up</td>
-             </div>
-                  
-        
-        
-        <td class="price">ราคา</td>
-                        <td class="qty">ชิ้น</td>
-                        <td class="total">รวมราคา(บาท)</td>
-                    </tr>
-                    <tr id="list">
-                        <td class="name">mock up</td>
-                        <td class="price">ราคา</td>
-                        <td class="qty">ชิ้น</td>
-                        <td class="total">รวมราคา(บาท)</td>
-                    </tr>
-                    <tr id="list">
-                        <td class="name">mock up</td>
-                        <td class="price">ราคา</td>
-                        <td class="qty">ชิ้น</td>
-                        <td class="total">รวมราคา(บาท)</td>
-                    </tr>
-
+                   
+                   
+                   <tbody id="list-container">
+                </tbody>
                </table>
                <div class="button">
                 <button onclick="">ยืนยัน</button>
 </div>
-</form>  
+</form>
+
+<script defer>
+
+    const MenuContainer = document.querySelector('#list-container')    
+    const Values = document.querySelectorAll('input');
+    function checkExisting(Lists,NewItem,qty)
+    {
+        for(let i=0;i<Lists.length;i++)
+        {
+            let name = Lists[i].querySelector('td.name').innerHTML
+            let price = Number(Lists[i].querySelector('td.price').innerHTML)
+            if(name === NewItem) {
+                Lists[i].querySelector('td.qty').innerHTML = qty;
+                Lists[i].querySelector('td.qty').value = qty;
+                Lists[i].querySelector('td.total').innerHTML = qty*price
+                Lists[i].querySelector('td.total').value = qty*price
+                console.log(Lists[i].querySelector('td.total').innerHTML)
+                return;
+            }
+        }
+        return true;
+    };
+
+    function deleteFromList(DeleteName,Lists)
+    {
+        for(let i=0;i<Lists.length;i++)
+        {
+            let CurrentItem = Lists[i].querySelector('td.name')
+            let name = CurrentItem.innerHTML
+            if(name === DeleteName) {
+                CurrentItem.parentElement.remove()
+            }
+        }
+        return true;
+    }
+
+
+//////////////////////////////////////////////////////
+    Values.forEach((Value)=>
+    {
+        Value.addEventListener('input',()=>
+        {
+            const ExistingList = MenuContainer.querySelectorAll('tr')
+            if(Value.value < 1) {
+                    Value.value = 0 ;
+                    if(ExistingList.length>0) 
+                    {
+                    let DeleteName = Value.parentElement.parentElement.querySelector('span#name').innerHTML;
+                    deleteFromList(DeleteName,ExistingList)
+                    }
+                    return
+            }
+            name = Value.parentElement.parentElement.querySelector('span#name').innerHTML
+            qty = Number(Value.value)
+            if(!checkExisting(ExistingList,name,qty)) return
+            price = Number(Value.parentElement.parentElement.querySelector('span#price').innerHTML)
+            total = price*qty;
+            const list = document.createElement('tr')
+            list.id = 'list'
+            list.innerHTML = `<td class="name" value="${name} name="name">${name}</td>
+                              <td class="price" value="${price} name="price">${price}</td>
+                              <td class="qty" value="${price}" name="${qty}">${qty}</td>
+                              <td class="total" value="${total}">${total}</td>
+                              `
+            MenuContainer.appendChild(list)
+
+        })
+    })
+    
+    
+
+</script>
 <%- include ('partials/footer') %>

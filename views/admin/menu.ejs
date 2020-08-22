@@ -11,9 +11,10 @@
 
             <div class="menu-list">
                 <% if (!food.img)  food.img = 'imgs/anonymous.jpg' %>
-                <img src="<%= food.img %>" alt="<%=food.name%>"
-                <p> <%= food.name %> 
-                    <%= food.price %> บาท</p>
+                <img src="<%= food.img %>" alt="<%=food.name%>">
+                <p>
+                    <%= food.name %> 
+                    <%= food.price %> บาท   </p>
                 <p class="description"><%= food.description %> </p>
                 <p><a href="/admin/food/edit/<%= food._id %>">edit</a> <a class="del" href="/admin/food/delete/<%= food._id %>">delete</a></p>
 
@@ -32,10 +33,5 @@
 </section>
 
 <script>
-    let del = document.querySelectorAll("a.del");
-    del.addEventListener('click',(e)=>
-    {
-        e.preventDefault();
-    })
 </script>
 <%- include ('../partials/adminFooter') %>

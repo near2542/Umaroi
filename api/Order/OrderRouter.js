@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require("./OrderModel");
 const Food = require("../Food/FoodModel")
-
+const cookie = require('cookie-parser')
 // For fetching on customer/admin page
 router.get("/",async (req,res)=>
 {
@@ -22,20 +22,17 @@ router.post("/:_id",async (req,res)=>
   });
 })
 
-router.put("/:_id",async (req,res)=>
-{
-    Food.findByIdAndUpdate(req.params._id, req.body, (err, data) => {
-        if (err) return res.status(400).send(err);
-        res.status(200).send("อัพเดทข้อมูลเรียบร้อย");
-      });
+router.get("/confirm/:object",async (req,res)=>{
+  res.send('this was reached')
 })
 
-router.delete("/:_id",async (req,res)=>
+router.post("/pushlist",async (req,res)=>
 {
-    Food.findByIdAndDelete(req.params._id, (err, data) => {
-        if (err) return res.status(400).send(err);
-        res.status(200).send("ลบข้อมูลเรียบร้อย");
-      });
+  res.cookie("lists",list)
 })
+
+
+
+
 
 module.exports = router;

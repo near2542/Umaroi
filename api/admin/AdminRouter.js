@@ -136,7 +136,7 @@ router.post("/food/edit/:_id",upload.single('img'),(req,res)=>
 })
 
 
-router.post("/food/delete/:_id",(req,res)=>
+router.get("/food/delete/:_id",(req,res)=>
 {
     Food.findByIdAndDelete(req.params._id, (err, data) => {
         if (err) return res.status(400).send(err);

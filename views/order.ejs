@@ -31,11 +31,7 @@
 </div>
 
 <a class="cart" href="#cart">ไปที่ตะกร้า</a>
-
-
-
-  
-        <form action="#" id="cart" method="POST">
+        <form  id="cart">
            <h1>สรุปรายการ</h1>
                <table>
                    <tr>
@@ -45,38 +41,21 @@
                        <th class="total">รวมราคา(บาท)</th>
                    </tr>
                    <!-------------------End table head------------------>
-                   
-                   
-                   <tbody id="list-container">
-                </tbody>
+                   <tbody id="list-container"></tbody>
                </table>
-               <div class="button">
-                <button onclick="">ยืนยัน</button>
+               <div class="button"> 
+                  <button id="confirm" type="menu">confirm</button>
 </div>
 </form>
 
 <script defer>
-
     const MenuContainer = document.querySelector('#list-container')    
     const Values = document.querySelectorAll('input');
-    function checkExisting(Lists,NewItem,qty)
-    {
-        for(let i=0;i<Lists.length;i++)
-        {
-            let name = Lists[i].querySelector('td.name').innerHTML
-            let price = Number(Lists[i].querySelector('td.price').innerHTML)
-            if(name === NewItem) {
-                Lists[i].querySelector('td.qty').innerHTML = qty;
-                Lists[i].querySelector('td.qty').value = qty;
-                Lists[i].querySelector('td.total').innerHTML = qty*price
-                Lists[i].querySelector('td.total').value = qty*price
-                console.log(Lists[i].querySelector('td.total').innerHTML)
-                return;
-            }
-        }
-        return true;
-    };
+    const confirm = document.querySelector('#confirm');
 
+
+    confirm.addEventListener('click',gotoConfirm)
+    
     function deleteFromList(DeleteName,Lists)
     {
         for(let i=0;i<Lists.length;i++)
@@ -90,6 +69,29 @@
         return true;
     }
 
+    function gotoConfirm()
+    { 
+        const Lists = MenuContainer.querySelectorAll('tr')
+        let ordersParams = [];
+        for(let i=0;i<Lists.length;i++)
+        {
+            const paramsHold = {
+                name : Lists[i].querySelector('td.name').innerHTML,
+                price : Number(Lists[i].querySelector('td.price').innerHTML),
+                qty : Number(Lists[i].querySelector('td.qty').innerHTML),
+                total : Number(Lists[i].querySelector('td.total').innerHTML),
+                }
+
+            ordersParams.push(paramsHold)
+            console.log(ordersParams)
+            
+        }
+        localStorage.clear()
+        localStorage.setItem('lists',JSON.stringify(ordersParams))
+        window.location.href = "/order/confirm";
+        
+    
+    }
 
 //////////////////////////////////////////////////////
     Values.forEach((Value)=>
@@ -113,16 +115,33 @@
             total = price*qty;
             const list = document.createElement('tr')
             list.id = 'list'
-            list.innerHTML = `<td class="name" value="${name} name="name">${name}</td>
-                              <td class="price" value="${price} name="price">${price}</td>
-                              <td class="qty" value="${price}" name="${qty}">${qty}</td>
-                              <td class="total" value="${total}">${total}</td>
+            list.innerHTML = `<td class="name" value="${name}" name="name">${name}</td>
+                              <td class="price" value="${price}" name="price">${price}</td>
+                              <td class="qty" value="${price}" name="qty">${qty}</td>
+                              <td class="total" value="${total}" name="total">${total}</td>
                               `
             MenuContainer.appendChild(list)
-
+            
         })
     })
     
+    function checkExisting(Lists,NewItem,qty)
+    {
+        for(let i=0;i<Lists.length;i++)
+        {
+            let name = Lists[i].querySelector('td.name').innerHTML
+            let price = Number(Lists[i].querySelector('td.price').innerHTML)
+            if(name === NewItem) {
+                Lists[i].querySelector('td.qty').innerHTML = qty;
+                Lists[i].querySelector('td.qty').value = qty;
+                Lists[i].querySelector('td.total').innerHTML = qty*price
+                Lists[i].querySelector('td.total').value = qty*price
+                console.log(Lists[i].querySelector('td.total').innerHTML)
+                return;
+            }
+        }
+        return true;
+    };
     
 
 </script>
